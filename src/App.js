@@ -34,7 +34,7 @@ export default function App() {
         <Route path="favourite" element={<Favourite />}/>
         <Route path="account" element={<Account />}/>
       </Route>
-      <Route path="*" element={"Not Found"} />
+     
     </Routes>
   );
 }
