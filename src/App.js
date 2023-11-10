@@ -24,7 +24,6 @@ export default function App() {
   
   return (
     <Routes>
-      <Route path="*" element={"Not Found"} />
       <Route path="/" element={<Home />} />
       <Route path="/LoginPage" element={<PublicRoute><LoginPage /></PublicRoute>} />
       <Route path="/RegisterPage" element={<RegisterPage />} />
@@ -35,6 +34,7 @@ export default function App() {
         <Route path="favourite" element={<Favourite />}/>
         <Route path="account" element={<Account />}/>
       </Route>
+     
     </Routes>
   );
 }
