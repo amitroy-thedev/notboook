@@ -10,6 +10,7 @@ import Account from './pages/Account';
 import NotesToAdd from './pages/NotesToAdd';
 import SnapsToAdd from './pages/SnapsToAdd';
 import Main from './components/Main';
+import NotFoundPage from './pages/NotFoundPage';
 
 
 export default function App() {
@@ -34,7 +35,7 @@ export default function App() {
         <Route path="favourite" element={<Favourite />}/>
         <Route path="account" element={<Account />}/>
       </Route>
-     
+      <Route path="*" element={<NotFoundPage/>} />
     </Routes>
   );
 }
