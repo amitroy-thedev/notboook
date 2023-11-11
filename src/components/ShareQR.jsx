@@ -5,8 +5,6 @@ import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 
 export default function ShareQR({ generatedQR, setGeneratedQR }) {
-  const logoUrl =
-    "https://firebasestorage.googleapis.com/v0/b/notboook-629b3.appspot.com/o/images%2F1689756536199.png?alt=media&token=c34c4ef5-cd8f-49ef-89e9-b19e60731702";
   const downloadRef = useRef(null);
 
   const download = async () => {

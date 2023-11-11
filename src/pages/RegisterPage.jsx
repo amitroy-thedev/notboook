@@ -9,7 +9,7 @@ import LeftContainer from "../components/LeftContainer";
 
 import Alert from "../components/Alert";
 
-import { AtSymbolIcon, EyeIcon, EyeSlashIcon, LockClosedIcon, LockOpenIcon, UserIcon } from "@heroicons/react/24/outline";
+import { AtSymbolIcon, LockClosedIcon, LockOpenIcon, UserIcon } from "@heroicons/react/24/outline";
 
 export default function RegisterPage() {
   const [username, setUsername] = useState("");
@@ -19,15 +19,10 @@ export default function RegisterPage() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-  const [sex, setSex] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
-  const handleGenderChange = (e) => {
-    setSex(e.target.value);
-  };
-  
   async function handleRegSubmit(e) {
     e.preventDefault();
     setIsLoading(true);

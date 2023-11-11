@@ -1,11 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { signInWithEmailAndPassword, getAuth, sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "../firebase";
 import LeftContainer from "../components/LeftContainer";
 import Alert from "../components/Alert";
 
-import { LockClosedIcon, AtSymbolIcon, LockOpenIcon, CheckIcon } from "@heroicons/react/24/outline";
+import { LockClosedIcon, AtSymbolIcon, LockOpenIcon } from "@heroicons/react/24/outline";
 
 
 export default function LoginPage() {
@@ -28,7 +27,6 @@ export default function LoginPage() {
         email,
         password
       );
-      const user = userCredential.user;
       setIsLoading(false);
       navigate("/Dashboard/Main");
       // localStorage.setItem("isAuth", true);

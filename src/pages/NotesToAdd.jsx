@@ -15,7 +15,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import QrScanner from "qr-scanner";
-import { CheckBadgeIcon, ExclamationTriangleIcon, XCircleIcon, XMarkIcon, EllipsisVerticalIcon, BookmarkIcon, BookmarkSlashIcon, TagIcon, CheckIcon, PlusCircleIcon, QrCodeIcon, MagnifyingGlassIcon, Bars3BottomRightIcon, BarsArrowDownIcon, BarsArrowUpIcon } from "@heroicons/react/24/outline";
+import { CheckBadgeIcon, ExclamationTriangleIcon, XCircleIcon, XMarkIcon, BookmarkIcon, QrCodeIcon, MagnifyingGlassIcon, BarsArrowDownIcon, BarsArrowUpIcon } from "@heroicons/react/24/outline";
 import ShowExtended from "../components/ShowExtended";
 
 export default function NotesToAdd() {
@@ -67,7 +67,7 @@ export default function NotesToAdd() {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [currentUser.uid]);
 
   async function sendNote(e) {
     e.preventDefault();
@@ -132,14 +132,14 @@ export default function NotesToAdd() {
   };
   
 
-  const addTag = async (e) => {
-    e.preventDefault();
-    if (tag) {
-      await updateDoc(doc(db, "notes", selectedNote.id), { tag: tag });
-      setTag("");
-      setShowTagInput(!showTagInput);
-    }
-  };
+  // const addTag = async (e) => {
+  //   e.preventDefault();
+  //   if (tag) {
+  //     await updateDoc(doc(db, "notes", selectedNote.id), { tag: tag });
+  //     setTag("");
+  //     setShowTagInput(!showTagInput);
+  //   }
+  // };
 
   const extendNote = (note) => {
     setShowExtendedNote(!showExtendedNote);

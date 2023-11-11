@@ -11,7 +11,7 @@ import {
 } from "@heroicons/react/24/solid";
 
 export default function Sidebar() {
-  const { signUserOut, currentUser } = useAuth();
+  const { signUserOut } = useAuth();
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
   const [hideSidebar, setHideSidebar] = useState(false);
 

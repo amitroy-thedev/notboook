@@ -5,8 +5,7 @@ import { db, storage } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import QrScanner from "qr-scanner";
 
-import { QrCodeIcon, ShareIcon, TrashIcon, CheckBadgeIcon, ExclamationTriangleIcon, XCircleIcon, XMarkIcon, EllipsisVerticalIcon, BookmarkIcon, BookmarkSlashIcon, TagIcon, CheckIcon, PlusCircleIcon, BarsArrowDownIcon, BarsArrowUpIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { PencilSquareIcon } from "@heroicons/react/24/solid";
+import { QrCodeIcon, CheckBadgeIcon, XMarkIcon, EllipsisVerticalIcon, BookmarkIcon, BarsArrowDownIcon, BarsArrowUpIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 export default function SnapsToAdd() {
   const [file, setFile] = useState(null);
@@ -57,7 +56,7 @@ export default function SnapsToAdd() {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [currentUser.uid, snapRef]);
 
   const handleSortOrderChange = (e) => {
     const selectedSortOrder = e.target.value;
@@ -201,7 +200,7 @@ export default function SnapsToAdd() {
           <textarea id="desc" cols="30" rows="10" placeholder='Description' onChange={(e) => setDesc(e.target.value)}></textarea>
           <input type="text" id="subject" value={subject} placeholder='Subject' onChange={(e) => setSubject(e.target.value)} />
           {progress && file && <div className='progress w100'>
-          <img src={URL.createObjectURL(file)} height="30px" width="30px"/>
+          <img src={URL.createObjectURL(file)} height="30px" width="30px" alt=''/>
           <div className="image-details">
             <p>{file.name.length > 20 ? `${file.name.slice(0, 20)}...` : file.name}</p>
             <p>{(file.size / 1024 / 1024).toFixed(2)} MB</p>

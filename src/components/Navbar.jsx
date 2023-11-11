@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Logo from './Logo'
 import "../pages/Dashboard.css";
 import RandomAvatar from "./RandomAvatar";
 import { useAuth } from '../contexts/AuthContext';
@@ -9,7 +8,7 @@ import { NavLink } from 'react-router-dom';
 export default function Navbar() {
   const { currentUser } = useAuth();
   const [showNot, setShowNot] = useState(false);
-  const [showSearchBar, setShowSearchBar] = useState(false);
+  // const [showSearchBar, setShowSearchBar] = useState(false);
   const showNotification = () => {
     setShowNot(!showNot);
   }
