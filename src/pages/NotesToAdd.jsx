@@ -21,7 +21,7 @@ import ShowExtended from "../components/ShowExtended";
 export default function NotesToAdd() {
   const [note, setNote] = useState("");
   const [title, setTitle] = useState("");
-  const [tag, setTag] = useState("");
+  // const [tag, setTag] = useState("");
   const [searchWord, setSearchWord] = useState("");
   const [addShared, setAddShared] = useState("");
   const [notesList, setNotesList] = useState([]);
@@ -30,7 +30,7 @@ export default function NotesToAdd() {
   const [isMarked, setIsMarked] = useState(false);
   const [whileAdding, setWhileAdding] = useState("");
   const [whileScan, setWhileScan] = useState("");
-  const [showTagInput, setShowTagInput] = useState(false);
+  // const [showTagInput, setShowTagInput] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
   const [showShared, setShowShared] = useState(false);
   const [showExtendedNote, setShowExtendedNote] = useState(false);
@@ -67,14 +67,14 @@ export default function NotesToAdd() {
     return () => {
       unsubscribe();
     };
-  }, [currentUser.uid]);
+  }, [currentUser.uid, notesCollectionRef]);
 
   async function sendNote(e) {
     e.preventDefault();
     const noteToAdd = {
       title,
       note,
-      tag,
+      // tag,
       isMarked: false,
       user: currentUser.displayName,
       userID: currentUser.uid,
@@ -86,6 +86,7 @@ export default function NotesToAdd() {
     setTitle("");
     setShowAdd(!showAdd)
   }
+
   const clearAll = () => {
     setTitle("");
     setNote("");
@@ -100,7 +101,7 @@ export default function NotesToAdd() {
       const sharedNoteData = {
         title: findNoteSnapshot.data().title || '',
         note: findNoteSnapshot.data().note || '',
-        tag,
+        // tag,
         isMarked: false,
         user: currentUser.displayName,
         userID: currentUser.uid,
