@@ -89,7 +89,7 @@ export default function Main() {
       unsubscribeNotes();
       unsubscribeSnaps();
     };
-  }, [currentUser.uid]);
+  }, []);
 
   const extendNote = (note) => {
     setShowExtendedNote(!showExtendedNote);
