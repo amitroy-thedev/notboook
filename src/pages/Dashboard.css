@@ -565,10 +565,10 @@ input[type="range"]::-webkit-slider-thumb {
 .view .box3 { top: 10px; left: 0; }
 .view .box4 { top: 10px; left: 10px; }
 
-.notes-list {
+.notes-list, .snaps-list{
   display: grid;
   grid-gap: 1rem;
-  /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+  justify-content: center;
   grid-template-columns: repeat(auto-fit, 300px);
   margin: 15px 0;
 }
@@ -790,12 +790,7 @@ input[type="range"]::-webkit-slider-thumb {
   flex-grow: 1;
   margin-left: 15px;
 }
-.snaps-list {
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fit, 300px);
-  margin: 15px 0;
-}
+
 .snap-container h3 {
   text-align: center;
 }

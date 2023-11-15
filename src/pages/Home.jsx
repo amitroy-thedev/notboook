@@ -77,7 +77,7 @@ export default function Home() {
               Easily shareable <br />
               with your classmates <br />
               with the generated <br />
-              QR code
+              QR code / unique ID
             </h2>
           </div>
           <div className="homeright">

@@ -67,7 +67,7 @@ export default function NotesToAdd() {
     return () => {
       unsubscribe();
     };
-  }, [currentUser.uid, notesCollectionRef]);
+  }, []);
 
   async function sendNote(e) {
     e.preventDefault();
@@ -187,6 +187,7 @@ export default function NotesToAdd() {
      }, 2000);
     };
   }
+  
   return (
     <>
     <div className="top w100">

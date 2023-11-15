@@ -56,7 +56,7 @@ export default function SnapsToAdd() {
     return () => {
       unsubscribe();
     };
-  }, [currentUser.uid, snapRef]);
+  }, []);
 
   const handleSortOrderChange = (e) => {
     const selectedSortOrder = e.target.value;

@@ -59,7 +59,7 @@ export default function Favourite() {
       unsubscribeNotes();
       unsubscribeSnaps();
     };
-  }, [currentUser.uid]);
+  }, []);
  
   const extendNote = (note) => {
     setShowExtendedNote(!showExtendedNote);
