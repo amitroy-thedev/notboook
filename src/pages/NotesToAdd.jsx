@@ -67,6 +67,7 @@ export default function NotesToAdd() {
     return () => {
       unsubscribe();
     };
+    // eslint-disable-next-line
   }, []);
 
   async function sendNote(e) {
@@ -187,7 +188,7 @@ export default function NotesToAdd() {
      }, 2000);
     };
   }
-  
+
   return (
     <>
     <div className="top w100">

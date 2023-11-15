@@ -56,6 +56,7 @@ export default function SnapsToAdd() {
     return () => {
       unsubscribe();
     };
+    // eslint-disable-next-line
   }, []);
 
   const handleSortOrderChange = (e) => {

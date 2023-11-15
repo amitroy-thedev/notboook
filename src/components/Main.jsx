@@ -89,6 +89,7 @@ export default function Main() {
       unsubscribeNotes();
       unsubscribeSnaps();
     };
+  // eslint-disable-next-line
   }, []);
 
   const extendNote = (note) => {
