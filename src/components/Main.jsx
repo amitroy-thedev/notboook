@@ -6,7 +6,6 @@ import { Doughnut } from "react-chartjs-2";
 import { collection, onSnapshot, where, query, orderBy } from "firebase/firestore";
 import { db } from "../firebase";
 import ShowExtended from '../components/ShowExtended';
-import norecentnote from '../images/norecentnote.png';
 
 
 export default function Main() {
@@ -122,7 +121,7 @@ export default function Main() {
           <h2>Your Recent Works</h2>
           <h3>Note :</h3>
           <div className="no-note-templete">
-      {notesList.length === 0 && <img src={norecentnote} alt="no notes" height="200px"/>}
+      {notesList.length === 0 && <img src="../static/media/norecentnote.00b4d2eb7ec862d178cd.png" alt="no notes" height="200px"/>}
           </div>
           <div className="recent-note">
           {notesList
