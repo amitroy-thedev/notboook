@@ -121,7 +121,7 @@ export default function Main() {
           <h2>Your Recent Works</h2>
           <h3>Note :</h3>
           <div className="no-note-templete">
-      {notesList.length === 0 && <p>No recent note</p>}
+      {notesList.length === 0 && <p>No recent snap</p>}
           </div>
           <div className="recent-note">
           {notesList
