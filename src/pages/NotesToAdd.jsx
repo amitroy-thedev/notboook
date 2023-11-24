@@ -279,7 +279,7 @@ export default function NotesToAdd() {
       <div className="no-note-templete">
       {notesList.length === 0 && 
       <p className="no-notes">
-         New notes will appear here.
+         No notes
       </p>}
       {searchWord && ( notesList.filter((note) => note.title.toLowerCase().includes(searchWord.toLowerCase())).length === 0) && 
       <p className="no-notes">
