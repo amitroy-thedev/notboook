@@ -120,9 +120,7 @@ export default function Main() {
         <div className="mainbody">
           <h2>Your Recent Works</h2>
           <h3>Note :</h3>
-          <div className="no-note-templete">
-      {notesList.length === 0 && <p>No recent snap</p>}
-          </div>
+      {notesList.length === 0 && <p>No recent note</p>}
           <div className="recent-note">
           {notesList
             .slice(0, 5)
@@ -134,9 +132,7 @@ export default function Main() {
             ))}
           </div>
           <h3>Snaps :</h3>
-          <div className="no-note-templete">
       {snapsList.length === 0 && <p>No recent snap</p>}
-          </div>
           <div className="recent-snaps">
           {snapsList
             .sort((a, b) => b.createdAt - a.createdAt)
