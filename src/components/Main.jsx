@@ -121,7 +121,7 @@ export default function Main() {
           <h2>Your Recent Works</h2>
           <h3>Note :</h3>
           <div className="no-note-templete">
-      {notesList.length === 0 && <img src="../static/media/norecentnote.00b4d2eb7ec862d178cd.png" alt="no notes" height="200px"/>}
+      {notesList.length === 0 && <p>No recent note</p>}
           </div>
           <div className="recent-note">
           {notesList
@@ -134,6 +134,9 @@ export default function Main() {
             ))}
           </div>
           <h3>Snaps :</h3>
+          <div className="no-note-templete">
+      {snapsList.length === 0 && <p>No recent snap</p>}
+          </div>
           <div className="recent-snaps">
           {snapsList
             .sort((a, b) => b.createdAt - a.createdAt)

@@ -278,10 +278,9 @@ export default function NotesToAdd() {
       />}
       <div className="no-note-templete">
       {notesList.length === 0 && 
-      <><img src="../static/media/nonote.1c3dcd212f7bf025fa05.png" alt="no notes" height="400px"/>
       <p className="no-notes">
          New notes will appear here.
-      </p></>}
+      </p>}
       {searchWord && ( notesList.filter((note) => note.title.toLowerCase().includes(searchWord.toLowerCase())).length === 0) && 
       <p className="no-notes">
       No notes found with the title <b>{searchWord}</b>.
