@@ -17,7 +17,6 @@ import { useAuth } from "../contexts/AuthContext";
 import QrScanner from "qr-scanner";
 import { CheckBadgeIcon, ExclamationTriangleIcon, XCircleIcon, XMarkIcon, BookmarkIcon, QrCodeIcon, MagnifyingGlassIcon, BarsArrowDownIcon, BarsArrowUpIcon } from "@heroicons/react/24/outline";
 import ShowExtended from "../components/ShowExtended";
-import nonote from "../images/nonote.png";
 
 export default function NotesToAdd() {
   const [note, setNote] = useState("");
@@ -279,7 +278,7 @@ export default function NotesToAdd() {
       />}
       <div className="no-note-templete">
       {notesList.length === 0 && 
-      <><img src={nonote} alt="no notes" height="400px"/>
+      <><img src="../static/media/nonote.1c3dcd212f7bf025fa05.png" alt="no notes" height="400px"/>
       <p className="no-notes">
          New notes will appear here.
       </p></>}
