@@ -278,7 +278,6 @@ export default function NotesToAdd() {
       />}
       <div className="no-note-templete">
       {notesList.length === 0 && 
-      <><img src={nonote} alt="no notes" height="400px"/>
       <p className="no-notes">
          New notes will appear here.
       </p>}
