@@ -210,7 +210,7 @@ export default function SnapsToAdd() {
           <button onClick={cancelHandler}><XMarkIcon className='icon'/></button>
           </div>}
           <button type="submit" className="primary" disabled={progress && true}>{progress ?  <>Uploading <span className="dots">.</span><span className="dots">.</span><span className="dots">.</span></> : "Upload Snap" }</button>
-        {error && <p>{error}</p>}
+        {error && <p>{error.message}</p>}
         </form>
       </div>
       </div>}
@@ -267,7 +267,8 @@ export default function SnapsToAdd() {
       </div>}
       <div className="snaps-list">
       {snapList.length === 0 && <p className="no-notes">
-         No Snaps
+         {/* No Snaps */}
+         This feature is under construction it might not work properly.
       </p>}
       {searchWord && ( snapList.filter((snap) => snap.subject.toLowerCase().includes(searchWord.toLowerCase())).length === 0) && 
       <p className="no-notes">

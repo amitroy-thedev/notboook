@@ -26,7 +26,7 @@ export default function Home() {
             <h2>
               Never worry about <br />
               losing your notes <br />
-              again
+              again.
           </h2>
           {currentUser?<RandomAvatar uniqueUser={currentUser.uid}/>:<RandomAvatar sex="man"/>}
             {!currentUser ? <button className="primary"><NavLink to="/LoginPage" style={{color: "white"}} >Go to Login</NavLink></button>: <button className="primary"><NavLink to="/Dashboard/Main" style={{color: "white"}}>Go to Dashboard</NavLink></button>}
@@ -43,7 +43,7 @@ export default function Home() {
             <h2>
               Helps you to note <br />
               down your <br />
-              Reminders
+              Reminders.
             </h2>
           </div>
         </section>
@@ -51,11 +51,11 @@ export default function Home() {
           <div className="homeleft">
             <h2>
               Add images to your <br />
-              Notes
+              Notes.
             </h2>
           </div>
           <div className="homeright">
-            <img src={gallery} alt="gallery" height="400px" width="400px" />
+            <img src={gallery} alt="gallery" width="350px" />
           </div>
         </section>
         <section>
@@ -67,7 +67,7 @@ export default function Home() {
               Enhance your note <br />
               taking experience <br />
               by adding audio recording <br />
-              or images to your notes
+              to your notes.
             </h2>
           </div>
         </section>
@@ -77,7 +77,7 @@ export default function Home() {
               Easily shareable <br />
               with your classmates <br />
               with the generated <br />
-              QR code / unique ID
+              QR code / unique ID.
             </h2>
           </div>
           <div className="homeright">

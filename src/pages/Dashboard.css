@@ -192,10 +192,15 @@ rgba(53, 71, 90, 0.2) 0px 2px 12px 0px; */
 
 
 /* NOTES  */
+.no-note-templete{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 15px 0;
+}
 .no-notes{
-  font-size: 2rem;
-  margin-top: 25px;
-  position: relative;
+  font-size: 1.5rem;
+  text-align: center;
 }
 
 .top {
@@ -271,6 +276,7 @@ rgba(53, 71, 90, 0.2) 0px 2px 12px 0px; */
   color: #000;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .option button:active{
   background-color: #000;

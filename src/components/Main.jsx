@@ -6,6 +6,7 @@ import { Doughnut } from "react-chartjs-2";
 import { collection, onSnapshot, where, query, orderBy } from "firebase/firestore";
 import { db } from "../firebase";
 import ShowExtended from '../components/ShowExtended';
+import norecentnote from '../images/norecentnote.png';
 
 
 export default function Main() {
@@ -25,7 +26,7 @@ export default function Main() {
     datasets: [
       {
         label: "completed",
-        data: [totalNoOfNotes, totalNoOfSnaps, 8, 15],
+        data: [totalNoOfNotes, totalNoOfSnaps, 1, 1],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -120,6 +121,9 @@ export default function Main() {
         <div className="mainbody">
           <h2>Your Recent Works</h2>
           <h3>Note :</h3>
+          <div className="no-note-templete">
+      {notesList.length === 0 && <img src={norecentnote} alt="no notes" height="200px"/>}
+          </div>
           <div className="recent-note">
           {notesList
             .slice(0, 5)
@@ -142,7 +146,6 @@ export default function Main() {
              </div>
             ))}
           </div>
-          <h3>Important Ques & Ans :</h3>
         </div>
       </div>
     </>
