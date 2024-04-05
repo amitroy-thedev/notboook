@@ -47,6 +47,23 @@ export default function Alert({ error }) {
       errorMessage =
         "There is some issue from our side please come back after some time.";
       break;
+
+      // For Note
+      case "note-already-added":
+        errorMessage = "The note is already added please check your public folder.";
+        break;
+      case "note-added":
+        errorMessage = "Note added successfully !!";
+        backgroundColor = "green";
+        break;
+      case "note-marked":
+        errorMessage = "Note marked successfully !!";
+        backgroundColor = "green";
+        break;
+      case "note-unmarked":
+        errorMessage = "Note unmarked successfully !!";
+        backgroundColor = "red";
+        break;
   }
 
   return (

@@ -149,11 +149,7 @@ export default function LoginPage() {
               disabled={isLoading && true}
             >
               {isLoading ? (
-                <>
-                  Logging <span className="dots">.</span>
-                  <span className="dots">.</span>
-                  <span className="dots">.</span>
-                </>
+                  "Logging..."
               ) : (
                 "Login"
               )}

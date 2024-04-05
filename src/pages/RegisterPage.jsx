@@ -129,11 +129,7 @@ export default function RegisterPage() {
             </div>
             <button type="submit" className="primary" style={{ width: "100%", marginTop: "25px" }} disabled={isLoading && true}>
               {isLoading ? (
-                <>
-                  Creating <span className="dots">.</span>
-                  <span className="dots">.</span>
-                  <span className="dots">.</span>
-                </>
+                  "Creating..."
               ) : (
                 "Create"
               )}

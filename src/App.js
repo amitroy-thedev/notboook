@@ -8,10 +8,10 @@ import Home from "./pages/Home"
 import Favourite from './pages/Favourite';
 import Account from './pages/Account';
 import NotesToAdd from './pages/NotesToAdd';
-import SnapsToAdd from './pages/SnapsToAdd';
 import Main from './components/Main';
 import NotFoundPage from './pages/NotFoundPage';
-
+import Search from './pages/Search';
+import PublicNotes from './pages/PublicNotes';
 
 export default function App() {
   const { currentUser } = useAuth();
@@ -30,9 +30,10 @@ export default function App() {
       <Route path="/RegisterPage" element={<RegisterPage />} />
       <Route path="/Dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>
         <Route path="main" element={<Main />}/>
+        <Route path="search" element={<Search />}/>
         <Route path="notes" element={<NotesToAdd />}/>
-        <Route path="snaps" element={<SnapsToAdd />}/>
         <Route path="favourite" element={<Favourite />}/>
+        <Route path="publicnotes" element={<PublicNotes />}/>
         <Route path="account" element={<Account />}/>
       </Route>
       <Route path="*" element={<NotFoundPage/>} />
