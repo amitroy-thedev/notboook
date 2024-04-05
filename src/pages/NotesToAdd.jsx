@@ -9,14 +9,19 @@ import {
   doc,
   updateDoc,
   orderBy,
+  arrayRemove,
+  arrayUnion,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import QrScanner from "qr-scanner";
-import { CheckBadgeIcon, ExclamationTriangleIcon, XCircleIcon, XMarkIcon, BookmarkIcon, QrCodeIcon, MagnifyingGlassIcon, BarsArrowDownIcon, BarsArrowUpIcon } from "@heroicons/react/24/outline";
+import { CheckBadgeIcon, ExclamationTriangleIcon, XCircleIcon, XMarkIcon, BookmarkIcon, QrCodeIcon, MagnifyingGlassIcon, BarsArrowDownIcon, BarsArrowUpIcon, LockClosedIcon, LockOpenIcon, KeyIcon, PlusIcon, TagIcon } from "@heroicons/react/24/outline";
 import ShowExtended from "../components/ShowExtended";
+import Markdown from "react-markdown";
+import nonote from "../images/nonote.png";
+
 
 export default function NotesToAdd() {
   const [note, setNote] = useState("");
@@ -27,7 +32,7 @@ export default function NotesToAdd() {
   const [notesList, setNotesList] = useState([]);
   const notesCollectionRef = collection(db, "notes");
   const { currentUser } = useAuth();
-  const [isMarked, setIsMarked] = useState(false);
+  const [isPublic, setIsPublic] = useState(false);
   const [whileAdding, setWhileAdding] = useState("");
   const [whileScan, setWhileScan] = useState("");
   // const [showTagInput, setShowTagInput] = useState(false);
@@ -76,7 +81,9 @@ export default function NotesToAdd() {
       title,
       note,
       // tag,
-      isMarked: false,
+      isPublic: false,
+      likedBy: [],
+      markedBy: [],
       user: currentUser.displayName,
       userID: currentUser.uid,
       createdAt: new Date(),
@@ -102,8 +109,6 @@ export default function NotesToAdd() {
       const sharedNoteData = {
         title: findNoteSnapshot.data().title || '',
         note: findNoteSnapshot.data().note || '',
-        // tag,
-        isMarked: false,
         user: currentUser.displayName,
         userID: currentUser.uid,
         addedFrom: findNoteSnapshot.data().user,
@@ -129,10 +134,16 @@ export default function NotesToAdd() {
   };
   
   const markNote = async (noteId) => {
-    setIsMarked(!isMarked);
-    await updateDoc(doc(db, 'notes', noteId), { isMarked: !isMarked, markedAt: new Date() });
-  };
+    // setIsMarked(!isMarked);
+    await updateDoc(doc(db, 'notes', noteId), {
+      'markedBy': note?.markedBy?.includes(currentUser.uid) ? arrayRemove(currentUser.uid) : arrayUnion(currentUser.uid)
+    })
+  }
   
+  const markPublic = async (noteId) => {
+    setIsPublic(!isPublic);
+    await updateDoc(doc(db, 'notes', noteId), { isPublic: !isPublic});
+  }
 
   // const addTag = async (e) => {
   //   e.preventDefault();
@@ -192,7 +203,7 @@ export default function NotesToAdd() {
   return (
     <>
     <div className="top w100">
-      <button onClick={() => setShowAdd(!showAdd)} className='primary'><span>Add a Note</span></button>
+      <button onClick={() => setShowAdd(!showAdd)} className='primary'><span><PlusIcon className="icon"/>Add a Note</span></button>
       {showAdd && 
       <div className="back">
       <div className="card note-container">
@@ -214,13 +225,13 @@ export default function NotesToAdd() {
             onChange={(e) => setNote(e.target.value)}
           />
         </div>
-        <button type="submit" disabled={!note && true} className="primary">+ Add the note</button>
+        <button type="submit" disabled={!note && true} className="primary">Add the note</button>
         <button onClick={clearAll} disabled={!note && true} style={{marginLeft: "15px"}} className="secondary">Clear All</button>
       </form>
       </div>
       </div>}
               
-      <button onClick={() => setShowShared(!showShared)} className='secondary'>Have Share ID ?</button>
+      <button onClick={() => setShowShared(!showShared)} className='secondary'><span><KeyIcon className="icon"/>Have Share ID ?</span></button>
       {showShared && 
       <div className="back">
       <div className="card">
@@ -268,67 +279,66 @@ export default function NotesToAdd() {
         </button>
       </div>
       {showSearchNote && <div className="input-field">
-      <input type="text" placeholder="Search with Note title" onChange={(e) => setSearchWord(e.target.value)}/>
+      <input type="text" placeholder="Search with Note title or tag" onChange={(e) => setSearchWord(e.target.value)}/>
       </div>}
       {showExtendedNote && <ShowExtended 
       selectedNote={selectedNote} 
       setShowExtendedNote={setShowExtendedNote} 
-      setIsMarked={setIsMarked} 
-      isMarked={isMarked}
+      isPublic={isPublic}
       />}
       <div className="no-note-templete">
-      {notesList.length === 0 && 
+      {(notesList.length === 0 && !searchWord) &&
       <p className="no-notes">
          No notes
       </p>}
-      {searchWord && ( notesList.filter((note) => note.title.toLowerCase().includes(searchWord.toLowerCase())).length === 0) && 
+      {searchWord && ( notesList.filter((note) => note.title.toLowerCase().includes(searchWord.toLowerCase()) || note.tag?.toLowerCase().includes(searchWord.toLowerCase())).length === 0) && 
       <p className="no-notes">
-      No notes found with the title <b>{searchWord}</b>.
+      No notes found with the title or tag <b>{searchWord}</b>.
       </p>}
+        {notesList.length === 0 && <img src={nonote} alt="No notes" height="350px"/>}
       </div>
       
       <div className="notes-list">
       {notesList
-        .filter((note) => note.title.toLowerCase().includes(searchWord.toLowerCase()))
+        .filter((note) => note.title?.toLowerCase().includes(searchWord.toLowerCase()) || note.tag?.toLowerCase().includes(searchWord.toLowerCase()))
         .map((note) => (
         <div className={`${changeViewType ? "changeNoteView" : "notes"}`}
         key={note.id}
         >
         <div className="header">
-        <button onClick={() => markNote(note.id)}>
-          {note.isMarked ? (
+          <h3>{note.title === "" ? "No Title" : (note.title.length > 20 ? `${note.title.slice(0, 20)}...` : note.title)}</h3>
+        </div>
+          <div className="note-body" onClick={() => extendNote(note)}>
+            {changeViewType ? 
+            <Markdown>{note.note.replace(/<br>/g, '\n') && note.note.length > 100 ? `${note.note.replace(/<br>/g, '\n').slice(0, 100)}...` : note.note.replace(/<br>/g, '\n')}</Markdown> :
+            <Markdown>{note.note.replace(/<br>/g, '\n') && note.note.length > 250 ? `${note.note.replace(/<br>/g, '\n').slice(0, 250)}...` : note.note.replace(/<br>/g, '\n')}</Markdown>}
+          </div>
+          <div className="tag-container">
+              {note.tag && 
+              <div className="tag">
+              <TagIcon className="icon"/>
+              <p>{note.tag}</p>
+              </div>}
+            </div>
+          <div className="bottom">
+            <p>{note.createdAt.toDate().toDateString()}</p>
+            <button className="publicbtn" onClick={() => markPublic(note.id)} style={{marginRight:"30px"}}>
+          {note.isPublic ? (
+            <LockOpenIcon className="icon"/>
+            ) : (
+            <LockClosedIcon className="icon"/>
+          )}
+        </button>
+        <button className="markbtn" onClick={() => markNote(note.id)}>
+          {note?.markedBy?.includes(currentUser.uid) ? (
             <BookmarkIcon className="icon" style={{fill: "black"}} />
             ) : (
             <BookmarkIcon className="icon" />
           )}
         </button>
-          <h3>{note.title === "" ? "No Title" : (note.title.length > 20 ? `${note.title.slice(0, 20)}...` : note.title)}</h3>
-        </div>
-
-          <div className="note-body" onClick={() => extendNote(note)}>
-            {changeViewType ? <p
-              dangerouslySetInnerHTML={{
-                __html:
-                  note.note && note.note.length > 100 ? `${note.note.slice(0, 100)}...` : note.note
-              }}
-            /> :
-            <p
-              dangerouslySetInnerHTML={{
-                __html:
-                  note.note && note.note.length > 250 ? `${note.note.slice(0, 250)}...` : note.note
-              }}
-            />}
-          </div>
-          <div className="bottom">
-            <p>{note.createdAt.toDate().toDateString()}</p>
           </div>
           {note.addedFrom && <p className="addedfrom">Added From {note.addedFrom}</p>}
-            <div className="tag-container">
-              {note.tag && 
-              <div className="tag">
-              <p>{note.tag}</p>
-              </div>}
-            </div>
+            
           </div>
           ))}
       </div>

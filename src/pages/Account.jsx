@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import "./Dashboard.css";
+import "./Account.css";
 import { ArrowRightOnRectangleIcon, CheckIcon, PencilIcon } from "@heroicons/react/24/outline";
 import { updateProfile, verifyBeforeUpdateEmail } from "firebase/auth";
 

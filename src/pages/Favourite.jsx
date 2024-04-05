@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import {
   collection,
   onSnapshot,
@@ -8,56 +8,57 @@ import {
 import { db } from "../firebase";
 import { useAuth } from '../contexts/AuthContext';
 import ShowExtended from '../components/ShowExtended';
+import suggest from "../images/suggest.png";
 
 export default function Favourite() {
   const { currentUser } = useAuth();
   const [ markedNotes, setMarkedNotes ] = useState([]);
-  const [ markedSnaps, setMarkedSnaps ] = useState([]);
+  const [publicList, setPublicList] = useState([]);
   const [showExtendedNote, setShowExtendedNote] = useState(false);
   const [selectedNote, setSelectedNote] = useState("");
+  const [isPubliclyAddedNote, setIsPubliclyAddedNote] = useState(false);
 
   useEffect(() => {
     const notesQuery = query(
       collection(db, "notes"),
-      where("userID", "==", currentUser.uid),
-      where("isMarked", "==", true)
-    );  
-    const snapsQuery = query(
-      collection(db, "snaps"),
-      where("userID", "==", currentUser.uid),
-      where("isMarked", "==", true)
-    );  
+      // where("userID", "==", currentUser.uid),
+      where("markedBy", "array-contains", currentUser.uid)
+      );    
+      const publicQuery = query(
+        collection(db, "publiclyAccessNotes"),
+        where("userID", "==", currentUser.uid),
+        where("markedBy", "array-contains", currentUser.uid)
+      );
+      const unsubscribeNotes = onSnapshot(
+        notesQuery,
+        (snapshot) => {
+          const notesData = snapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          }));
+          setMarkedNotes(notesData);
+        },
+        (err) => {
+          alert('Error fetching marked notes:', err);
+        }
+        );
+        const unsubscribePublic = onSnapshot(
+          publicQuery,
+          (publicSnapshot) => {
+            const publicData = publicSnapshot.docs.map((doc) => ({
+              ...doc.data(),
+              id: doc.id,
+            }));
+            setPublicList(publicData);
+          },
+          (err) => {
+            alert("Error fetching publicly available notes:", err);
+          }
+        );
 
-    const unsubscribeNotes = onSnapshot(
-      notesQuery,
-      (snapshot) => {
-        const notesData = snapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setMarkedNotes(notesData);
-      },
-      (err) => {
-        console.log('Error fetching snaps:', err);
-      }
-    );
-
-    const unsubscribeSnaps = onSnapshot(
-      snapsQuery,
-      (snapshot) => {
-        const snapsData = snapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setMarkedSnaps(snapsData);
-      },
-      (err) => {
-        console.log('Error fetching snaps:', err);
-      }
-    );
-    return () => {
+        return () => {
+      unsubscribePublic();
       unsubscribeNotes();
-      unsubscribeSnaps();
     };
     // eslint-disable-next-line
   }, []);
@@ -68,34 +69,40 @@ export default function Favourite() {
   }
 
   return (
-    <div>
+    <>
       {showExtendedNote && <ShowExtended 
       selectedNote={selectedNote}
-      setShowExtendedNote={setShowExtendedNote} 
+      setShowExtendedNote={setShowExtendedNote}
+      isPubliclyAddedNote={isPubliclyAddedNote}
       />}
-
-      <p>Total marked Notes: {markedNotes.length}</p>
+      {(markedNotes.length === 0 && publicList.length === 0 ) && <img src={suggest} alt="suggest" className="suggest"/> }
+      <p >Private and Explore <span className='no-of-notes'>{markedNotes.length}</span></p>
       <div className="marked-list">
       {markedNotes
       .sort((a,b) => b.markedAt - a.markedAt)
       .map((note) => (
-        <div className="marked-note" key={note.id} onClick={() => extendNote(note)}>
-          <h3>{note.title === "" ? "No Title" : (note.title.length > 20 ? `${note.title.slice(0, 20)}...` : note.title)}</h3>
-          <p>{note.note && note.note.length > 15 ? `${note.note.slice(0, 15)}...` : note.note}</p>
+        <div className="marked-note" key={note.id} style={{display: "flex"}}>
+          <div className="marked-body" onClick={() => extendNote(note)}>
+            <h3>{note.title === "" ? "No Title" : (note.title.length > 20 ? `${note.title.slice(0, 20)}...` : note.title)}</h3>
+            <p>{note.note && note.note.length > 15 ? `${note.note.slice(0, 15)}...` : note.note}</p>
+          </div>
         </div>
-      ))}
+        ))}
       </div>
-
-      <p>Total marked Snaps: {markedSnaps.length}</p>
+      <p>Public <span className='no-of-notes'>{publicList.length}</span></p>
       <div className="marked-list">
-      {markedSnaps.map((snap) => (
-        <div className="marked-snap marked-note" key={snap.id} onClick={() => extendNote(snap)}>
-          <img src={snap.image} alt={snap.subject}/>
-          <p>{snap.desc === "" ? "No Desc" : (snap.desc.length > 20 ? `${snap.desc.slice(0, 20)}...` : snap.desc)}</p>
+      {publicList
+      .sort((a,b) => b.markedAt - a.markedAt)
+      .map((note) => (
+        <div className="marked-note" key={note.id} style={{display: "flex"}}>
+          <div className="marked-body" onClick={() => { extendNote(note); setIsPubliclyAddedNote(true)}}>
+            <h3>{note.title === "" ? "No Title" : (note.title.length > 20 ? `${note.title.slice(0, 20)}...` : note.title)}</h3>
+            <p>{note.note && note.note.length > 15 ? `${note.note.slice(0, 15)}...` : note.note}</p>
+          </div>
         </div>
-      ))}
+        ))}
       </div>
-    </div>
+    </>
   );
   
 }

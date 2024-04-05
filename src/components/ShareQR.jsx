@@ -1,4 +1,4 @@
-import { XMarkIcon } from '@heroicons/react/24/outline';
+import { ArrowDownTrayIcon, KeyIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import React, { useRef } from 'react';
 import { QRCode } from "react-qrcode-logo";
 import domtoimage from "dom-to-image";
@@ -20,7 +20,7 @@ export default function ShareQR({ generatedQR, setGeneratedQR }) {
         // Use the 'file-saver' library to initiate the download
         saveAs(blob, `${generatedQR}.png`);
       } catch (error) {
-        alert("Error while downloading QR code", error);
+        alert("Failed while downloading the QR code, Try again !", error);
       }
     }
   };
@@ -35,9 +35,9 @@ export default function ShareQR({ generatedQR, setGeneratedQR }) {
             </button>
             <div className="qrcode" ref={downloadRef}>
               <QRCode value={generatedQR}/>
-              <h2 className='w100'>{generatedQR}</h2>
+              <h2 className='w100'><KeyIcon className='icon'/>{generatedQR}</h2>
             </div>
-            <button type='button' className="download-btn" onClick={download}>DOWNLOAD QR</button>
+            <button type='button' className="download-btn primary" onClick={download}>DOWNLOAD QR <ArrowDownTrayIcon className='icon'/></button>
           </div>
         </div>
       )}
