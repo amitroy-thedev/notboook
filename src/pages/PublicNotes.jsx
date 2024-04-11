@@ -4,6 +4,7 @@ import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
 import ShowExtended from "../components/ShowExtended";
 import { BookmarkIcon, TagIcon } from "@heroicons/react/24/outline";
+import addnewnote from "../images/addnewnote.gif";
 
 
 export default function PublicNotes() {
@@ -64,7 +65,7 @@ export default function PublicNotes() {
       <p className="no-notes">
          No Public notes
       </p>}
-      {publicList.length === 0 && <><img src="../static/media/addnewnote.3ab3ee6b2edf212c6bf3.gif" alt="No notes" height="300px" style={{marginTop: "20px"}}/>
+      {publicList.length === 0 && <><img src={addnewnote} alt="No notes" height="300px" style={{marginTop: "20px"}}/>
           <div className="steps">
             <h3>Steps to add a note</h3>
       <ol>

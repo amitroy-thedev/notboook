@@ -20,6 +20,7 @@ import QrScanner from "qr-scanner";
 import { CheckBadgeIcon, ExclamationTriangleIcon, XCircleIcon, XMarkIcon, BookmarkIcon, QrCodeIcon, MagnifyingGlassIcon, BarsArrowDownIcon, BarsArrowUpIcon, LockClosedIcon, LockOpenIcon, KeyIcon, PlusIcon, TagIcon } from "@heroicons/react/24/outline";
 import ShowExtended from "../components/ShowExtended";
 import Markdown from "react-markdown";
+import nonote from "../images/nonote.png";
 
 
 export default function NotesToAdd() {
@@ -294,7 +295,7 @@ export default function NotesToAdd() {
       <p className="no-notes">
       No notes found with the title or tag <b>{searchWord}</b>.
       </p>}
-        {notesList.length === 0 && <img src="../static/media/nonote.1d65e2cce1332132f5e7.png" alt="No notes" height="350px"/>}
+        {notesList.length === 0 && <img src={nonote} alt="No notes" height="350px"/>}
       </div>
       
       <div className="notes-list">
