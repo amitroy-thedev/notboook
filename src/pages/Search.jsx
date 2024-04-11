@@ -13,7 +13,6 @@ import {
 import { db } from "../firebase";
 import ShowExtended from "../components/ShowExtended";
 import { useAuth } from "../contexts/AuthContext";
-import nopublicnote from "../images/nopublicnote.png";
 
 
 export default function Search(){
@@ -157,7 +156,7 @@ export default function Search(){
       No public notes found with the title <br /><b>{searchTerm}</b>.
       </p>}
       {publicNotesList.length === 0 && <div className="no-note-templete">
-      <img src={nopublicnote} alt="No notes" height="200px"/>
+      <img src="../static/media/nopublicnote.f3242a876bf250e0344e.png" alt="No notes" height="200px"/>
         <p>Fetching notes...</p>
       </div>}
 

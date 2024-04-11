@@ -8,7 +8,6 @@ import {
 import { db } from "../firebase";
 import { useAuth } from '../contexts/AuthContext';
 import ShowExtended from '../components/ShowExtended';
-import suggest from "../images/suggest.png";
 
 export default function Favourite() {
   const { currentUser } = useAuth();
@@ -75,7 +74,6 @@ export default function Favourite() {
       setShowExtendedNote={setShowExtendedNote}
       isPubliclyAddedNote={isPubliclyAddedNote}
       />}
-      {(markedNotes.length === 0 && publicList.length === 0 ) && <img src={suggest} alt="suggest" className="suggest"/> }
       <p >Private and Explore <span className='no-of-notes'>{markedNotes.length}</span></p>
       <div className="marked-list">
       {markedNotes
