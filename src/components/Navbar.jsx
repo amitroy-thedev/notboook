@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import "../pages/Dashboard.css";
 import RandomAvatar from "./RandomAvatar";
 import { useAuth } from '../contexts/AuthContext';
@@ -9,6 +9,7 @@ import animatedlogo from "../images/animatedlogo1.gif";
 
 export default function Navbar() {
   const { currentUser } = useAuth();
+  
   return (
     <>
     <div className="navbar">

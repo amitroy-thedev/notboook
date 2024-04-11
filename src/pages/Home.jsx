@@ -27,7 +27,7 @@ export default function Home() {
         </div>
       <ul className={`menu-list ${menuclicked ? '' : 'nav-closed'}`}>
         <li>{!currentUser ? <Link to="/RegisterPage">Sign up</Link> : <Link onClick={signUserOut}>Sign out</Link>}</li>
-        <li><a href="">How to use ?</a></li>
+        <li><a href="/">How to use ?</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#about">About</a></li>
       </ul>
