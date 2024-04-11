@@ -20,7 +20,7 @@ import QrScanner from "qr-scanner";
 import { CheckBadgeIcon, ExclamationTriangleIcon, XCircleIcon, XMarkIcon, BookmarkIcon, QrCodeIcon, MagnifyingGlassIcon, BarsArrowDownIcon, BarsArrowUpIcon, LockClosedIcon, LockOpenIcon, KeyIcon, PlusIcon, TagIcon } from "@heroicons/react/24/outline";
 import ShowExtended from "../components/ShowExtended";
 import Markdown from "react-markdown";
-import nonote from "../images/nonote.png";
+import nonote from ".././images/nonote.png";
 
 
 export default function NotesToAdd() {

@@ -4,7 +4,7 @@ import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
 import ShowExtended from "../components/ShowExtended";
 import { BookmarkIcon, TagIcon } from "@heroicons/react/24/outline";
-import addnewnote from "../images/addnewnote.gif";
+import addnewnote from ".././images/addnewnote.gif";
 
 
 export default function PublicNotes() {

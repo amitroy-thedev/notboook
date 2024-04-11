@@ -6,7 +6,7 @@ import { Doughnut } from "react-chartjs-2";
 import { collection, onSnapshot, where, query, orderBy } from "firebase/firestore";
 import { db } from "../firebase";
 import ShowExtended from '../components/ShowExtended';
-import norecentnote from "../images/norecentnote.png";
+import norecentnote from ".././images/norecentnote.png";
 
 export default function Main() {
   const { currentUser } = useAuth();

@@ -13,7 +13,7 @@ import {
 import { db } from "../firebase";
 import ShowExtended from "../components/ShowExtended";
 import { useAuth } from "../contexts/AuthContext";
-import nopublicnote from "../images/nopublicnote.png";
+import nopublicnote from ".././images/nopublicnote.png";
 
 
 export default function Search(){
