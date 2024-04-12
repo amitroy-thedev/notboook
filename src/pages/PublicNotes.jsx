@@ -4,8 +4,6 @@ import { db } from "../firebase";
 import { useAuth } from "../contexts/AuthContext";
 import ShowExtended from "../components/ShowExtended";
 import { BookmarkIcon, TagIcon } from "@heroicons/react/24/outline";
-import addnewnote from ".././images/addnewnote.gif";
-
 
 export default function PublicNotes() {
   const [publicList, setPublicList] = useState([]);
@@ -65,7 +63,7 @@ export default function PublicNotes() {
       <p className="no-notes">
          No Public notes
       </p>}
-      {publicList.length === 0 && <><img src={addnewnote} alt="No notes" height="300px" style={{marginTop: "20px"}}/>
+      {publicList.length === 0 && <><img src="https://firebasestorage.googleapis.com/v0/b/notboook-v2.appspot.com/o/addnewnote.gif?alt=media&token=69180ab5-d62f-4c6f-9b37-808f320cf804" alt="No notes" height="300px" style={{marginTop: "20px"}}/>
           <div className="steps">
             <h3>Steps to add a note</h3>
       <ol>

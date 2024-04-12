@@ -98,6 +98,9 @@ section img{
 @keyframes animate {
   to{visibility: visible;}
 }
+#howtouse{
+  /* background-color: #D5F8EF; */
+}
 #features ul{
   list-style: none;
   padding: 0 15px;

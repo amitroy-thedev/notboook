@@ -7,7 +7,6 @@ import scanqr from "../images/scanqr.svg";
 import searchbar from "../images/searchbar.gif";
 import markdown from "../images/markdown.png";
 import handwrittingnote from "../images/handwritingnote.gif";
-import animatedlogo from "../images/animatedlogo1.gif";
 import markdownfavicon from "../images/markdown-favicon.png"
 
 
@@ -21,17 +20,18 @@ export default function Home() {
     <>
       <nav>
         <Logo/>
-        <img src={animatedlogo} width="200px" alt="logo"/>
+        <img src="https://firebasestorage.googleapis.com/v0/b/notboook-v2.appspot.com/o/animatedlogo1.gif?alt=media&token=19ba4858-aac2-4194-992e-cd4acf1adfcd" width="200px" alt="logo"/>
         <div className="menuicon" onClick={() => setMenuclicked(!menuclicked)}>
           {menuclicked ? <XMarkIcon/> : <Bars3Icon/>}
         </div>
       <ul className={`menu-list ${menuclicked ? '' : 'nav-closed'}`}>
         <li>{!currentUser ? <Link to="/RegisterPage">Sign up</Link> : <Link onClick={signUserOut}>Sign out</Link>}</li>
-        <li><a href="/">How to use ?</a></li>
+        <li><a href="#howtouse">How to use ?</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#about">About</a></li>
       </ul>
       </nav>
+      
       <div className="home-container">
         <section>
           <div className="homeright">
@@ -81,6 +81,17 @@ export default function Home() {
           <div className="homeleft">
             <img src={scanqr} alt="scan" />
           </div>
+        </section>
+        <section id="howtouse">
+        <div className="homeleft">
+        <h2 style={{marginBottom: "15px"}}>How to use</h2>
+          </div>
+          <div className="homeright"><video
+        controls
+        src="https://firebasestorage.googleapis.com/v0/b/notboook-v2.appspot.com/o/howtouse.mp4?alt=media&token=a1e47015-7a11-495d-b9d3-3531981fda8d"
+        width="240">
+        Sorry, your browser doesn't support embedded videos, but don't worry, you can
+        </video></div>
         </section>
         <section id="features">
           <div className="homeright"><h2>More <br/> Features</h2></div>

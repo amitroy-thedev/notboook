@@ -6,7 +6,6 @@ import { Doughnut } from "react-chartjs-2";
 import { collection, onSnapshot, where, query, orderBy } from "firebase/firestore";
 import { db } from "../firebase";
 import ShowExtended from '../components/ShowExtended';
-import norecentnote from ".././images/norecentnote.png";
 
 export default function Main() {
   const { currentUser } = useAuth();
@@ -146,7 +145,7 @@ export default function Main() {
           <div className="recent">
           <div className="recent-note">
           <h3>Note :</h3>
-      {totalNoOfNotes === 0 && <><p>No recent note</p> <img src={norecentnote} alt="no recent note" /> </>}
+      {totalNoOfNotes === 0 && <><p>No recent note</p> <img src="https://firebasestorage.googleapis.com/v0/b/notboook-v2.appspot.com/o/norecentnote.png?alt=media&token=cd9950af-8043-4a89-b3e3-e881f22234c5" alt="no recent note" /> </>}
           {notesList
             .slice(0, 5)
             .map((note) => (
@@ -158,7 +157,7 @@ export default function Main() {
           </div>
           <div className="recent-note">
           <h3>Marked :</h3>
-      {totalNoOfMarkedNote === 0 && <><p>No recent marked</p> <img src={norecentnote} alt="no recent note" /> </>}
+      {totalNoOfMarkedNote === 0 && <><p>No recent marked</p> <img src="https://firebasestorage.googleapis.com/v0/b/notboook-v2.appspot.com/o/norecentnote.png?alt=media&token=cd9950af-8043-4a89-b3e3-e881f22234c5" alt="no recent note" /> </>}
           {markedList
             .slice(0, 5)
             .map((marked) => (
@@ -170,7 +169,7 @@ export default function Main() {
           </div>
           <div className="recent-note">
           <h3>Public :</h3>
-      {totalNoOfPublicNotes === 0 && <><p>No recent public</p> <img src={norecentnote} alt="no recent note"/> </>}
+      {totalNoOfPublicNotes === 0 && <><p>No recent public</p> <img src="https://firebasestorage.googleapis.com/v0/b/notboook-v2.appspot.com/o/norecentnote.png?alt=media&token=cd9950af-8043-4a89-b3e3-e881f22234c5" alt="no recent note"/> </>}
           {publicList
             .slice(0, 5)
             .map((note) => (
